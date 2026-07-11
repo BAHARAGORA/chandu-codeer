@@ -1,1 +1,587 @@
-hello world
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Chandu Coder | Premium Portfolio</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Modern Dark Theme Palette & Smooth UI Reset */
+        :root {
+            --bg-dark: #0d1117;
+            --bg-card: #161b22;
+            --accent: #58a6ff;
+            --accent-gradient: linear-gradient(135deg, #58a6ff, #bc8cff, #58a6ff);
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --border-color: #30363d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        html, body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            width: 100%;
+        }
+
+        /* Prevents zoom on double tap but allows text selection */
+        body {
+            touch-action: manipulation; 
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Navbar Layout */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(13, 17, 23, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShine 4s linear infinite;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+        }
+        
+        /* Navigation Links */
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hamburger Menu Icon */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-main);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            opacity: 0;
+            transform: translateY(40px) scale(0.95);
+            animation: popIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            background: var(--accent-gradient);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShine 3s linear infinite;
+        }
+        
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 35px;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 35px;
+            background: var(--accent-gradient);
+            background-size: 200% auto;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(88, 166, 255, 0.3);
+            transition: all 0.3s ease;
+            animation: pulseBtn 2s infinite;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(188, 140, 255, 0.5);
+            animation: none;
+            background-position: right center;
+        }
+
+        /* Global Sections */
+        section {
+            padding: 90px 0;
+            border-top: 1px solid #21262d;
+            overflow: hidden;
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--text-main);
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-gradient);
+            margin: 12px auto 0 auto;
+            border-radius: 4px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        /* About & Blob */
+        .about-text p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .blob-animation {
+            background: var(--accent-gradient);
+            background-size: 200% auto;
+            width: 250px;
+            height: 250px;
+            margin: 0 auto;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: bubble 6s ease-in-out infinite, textShine 5s linear infinite;
+            opacity: 0.85;
+            box-shadow: 0 10px 40px rgba(88, 166, 255, 0.4);
+            transition: transform 0.3s ease;
+        }
+        
+        .blob-animation:hover { transform: scale(1.05); }
+
+        /* Skills */
+        .skills-display {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .skill-tag {
+            background: rgba(88, 166, 255, 0.05);
+            color: var(--accent);
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border: 1px solid rgba(88, 166, 255, 0.2);
+            transition: all 0.4s ease;
+            cursor: default;
+        }
+        
+        .skill-tag:hover {
+            background: var(--accent);
+            color: var(--bg-dark);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(88, 166, 255, 0.3);
+        }
+
+        /* Project Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 35px 25px;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 16px;
+            background: var(--accent-gradient);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            margin: -2px;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .card:hover::before { opacity: 1; }
+        
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+        
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        
+        .card-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s ease;
+        }
+        
+        .card-link:hover { gap: 12px; }
+
+        /* Footer */
+        footer {
+            background: #090d13;
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+        
+        .contact-info p {
+            margin: 12px 0;
+            font-size: 1.05rem;
+            color: var(--text-muted);
+        }
+        
+        .contact-info a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .copyright {
+            font-size: 0.85rem;
+            color: #484f58;
+            margin-top: 40px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        /* Scroll Reveal Utility */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Keyframes */
+        @keyframes popIn {
+            0% { opacity: 0; transform: translateY(40px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes bubble {
+            0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
+        }
+
+        @keyframes textShine {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        @keyframes pulseBtn {
+            0% { box-shadow: 0 0 0 0 rgba(88, 166, 255, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(88, 166, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(88, 166, 255, 0); }
+        }
+
+        /* MOBILE RESPONSIVE FIXES */
+        @media (max-width: 768px) {
+            .hamburger { display: flex; } /* Show Hamburger */
+            
+            .nav-links {
+                position: absolute;
+                top: 100%; /* Just below navbar */
+                left: 0;
+                width: 100%;
+                background: rgba(22, 27, 34, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                text-align: center;
+                padding: 20px 0;
+                border-bottom: 1px solid var(--border-color);
+                /* Hide menu by default off-screen */
+                transform: translateY(-150%);
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            .nav-links.mobile-active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: all;
+            }
+
+            /* Hamburger X Animation */
+            .hamburger.toggle span:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            .hamburger.toggle span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.toggle span:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 30px;
+            }
+            
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1rem; }
+            .blob-animation { width: 180px; height: 180px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Chandu Coder</div>
+            
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content container">
+            <h1>Hi, I'm <span>Chandu Coder</span></h1>
+            <p>Premium Web & Full-Stack Application Developer crafting immersive, ultra-responsive, and animated digital experiences.</p>
+            <a href="#contact" class="btn">Hire Me</a>
+        </div>
+    </header>
+
+    <section id="about" class="reveal">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="grid-2">
+                <div class="about-text">
+                    <p>Main ek passionate Website aur Application Developer hu, jo ideas ko secure, scalable aur lightning-fast code mein badalta hai. Mera goal aisi digital space create karna hai jo dekhne mein premium lage aur chalne mein smooth ho.</p>
+                    <p>Har ek project mein UI/UX, fluid responsive layout, aur performance optimization ka poora dhyan rakhta hu taaki users ko behtareen experience mile.</p>
+                </div>
+                <div style="text-align: center;">
+                    <div class="blob-animation"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="reveal">
+        <div class="container">
+            <h2 class="section-title">My Tech Stack</h2>
+            <div class="skills-display">
+                <div class="skill-tag">HTML5 & CSS3</div>
+                <div class="skill-tag">JavaScript (ES6+)</div>
+                <div class="skill-tag">ReactJS / NextJS</div>
+                <div class="skill-tag">Node.js & Express</div>
+                <div class="skill-tag">Flutter & Firebase</div>
+                <div class="skill-tag">UI/UX Styling (Tailwind)</div>
+                <div class="skill-tag">Git & Cloud Deployment</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="reveal">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Premium E-Commerce App</h3>
+                    <p>Modern fluid UI ke sath high-performance e-commerce platform jo mobile aur desktop dono par lightning fast chalta hai.</p>
+                    <a href="#" class="card-link">Live Preview <span>&rarr;</span></a>
+                </div>
+                <div class="card">
+                    <h3>Real-time Chat Platform</h3>
+                    <p>WebSocket aur secure encryption par chalne wala sleek dashboard messaging application.</p>
+                    <a href="#" class="card-link">View Source <span>&rarr;</span></a>
+                </div>
+                <div class="card">
+                    <h3>SaaS Automation Tool</h3>
+                    <p>Complex business analytics data ko beautiful charts aur seamless animation me display karne wala platform.</p>
+                    <a href="#" class="card-link">Explore Code <span>&rarr;</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="reveal">
+        <div class="container">
+            <h2 class="section-title" style="margin-bottom: 30px;">Let's Connect</h2>
+            <div class="contact-info">
+                <p>Email: <a href="mailto:chanducoder@example.com">chanducoder@example.com</a></p>
+                <p>GitHub: <a href="#">github.com/chanducoder</a></p>
+            </div>
+            <p class="copyright">&copy; 2026 Chandu Coder. All Rights Reserved. Fully Responsive UX.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Mobile Hamburger Menu Logic
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const links = document.querySelectorAll('.nav-links li');
+
+        hamburger.addEventListener('click', () => {
+            // Toggle Nav
+            navLinks.classList.toggle('mobile-active');
+            // Burger Animation
+            hamburger.classList.toggle('toggle');
+        });
+
+        // Close menu when a link is clicked on mobile
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('mobile-active');
+                hamburger.classList.remove('toggle');
+            });
+        });
+
+        // 2. Scroll Reveal Animation Logic
+        window.addEventListener('scroll', reveal);
+        function reveal() {
+            var reveals = document.querySelectorAll('.reveal');
+            for(var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var revealTop = reveals[i].getBoundingClientRect().top;
+                var revealPoint = 120; // Animation trigger point
+
+                if(revealTop < windowHeight - revealPoint) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        
+        // Trigger reveal on initial page load
+        reveal();
+    </script>
+
+</body>
+</html>
