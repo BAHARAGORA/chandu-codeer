@@ -192,6 +192,17 @@
             box-shadow: 0 10px 25px rgba(0, 210, 255, 0.6);
         }
 
+        /* WhatsApp Button Special Styling */
+        .btn-whatsapp {
+            background: #25D366;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+        }
+        .btn-whatsapp:hover {
+            background: #1ebc5a;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.6);
+            background-position: left center; /* override gradient hover */
+        }
+
         /* Global Sections */
         section { padding: 80px 0; border-top: 1px solid var(--border-color); overflow: hidden; }
         .section-title { font-size: 2.2rem; font-weight: 700; text-align: center; margin-bottom: 50px; color: var(--text-main); }
@@ -265,36 +276,27 @@
             width: 100%; padding: 12px; margin-bottom: 15px; background: rgba(255,255,255,0.05);
             border: 1px solid var(--border-color); border-radius: 8px; color: #fff; outline: none; transition: 0.3s;
         }
-        .contact-box input:focus, .contact-box textarea:focus { border-color: var(--color-pink); background: rgba(255,255,255,0.1); }
+        .contact-box input:focus, .contact-box textarea:focus { border-color: #25D366; background: rgba(255,255,255,0.1); }
         footer { text-align: center; padding: 20px 0; background: #080c16; color: var(--text-muted); }
 
-        /* ========================================================
-           SCROLL REVEAL ANIMATION CLASSES (Yaha Jadu Hai!)
-           ======================================================== */
-        
-        /* Base Reveal Class */
+        /* SCROLL REVEAL ANIMATION CLASSES */
         .reveal { opacity: 0; transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
         .reveal.active { opacity: 1; transform: translate(0) scale(1); }
-
-        /* Specific Directions */
         .fly-left { transform: translateX(-150px); }
         .fly-right { transform: translateX(150px); }
         .fly-up { transform: translateY(100px); }
         .zoom-in { transform: scale(0.5); }
 
-        /* ========================================================
-           KEYFRAMES (Page Load Animations)
-           ======================================================== */
+        /* KEYFRAMES */
         @keyframes slideDownNav { from { transform: translateY(-100%); } to { transform: translateY(0); } }
         @keyframes flyInLeft { from { opacity: 0; transform: translateX(-100px); } to { opacity: 1; transform: translateX(0); } }
         @keyframes flyInRight { from { opacity: 0; transform: translateX(100px); } to { opacity: 1; transform: translateX(0); } }
         @keyframes flyInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes zoomPopIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
-        
         @keyframes colorShift { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
         @keyframes bubble { 0%, 100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; } 50% { border-radius: 70% 30% 40% 60% / 60% 40% 50% 40%; } }
 
-        /* MOBILE RESPONSIVE - 60% SIDE MENU */
+        /* MOBILE RESPONSIVE */
         @media (max-width: 768px) {
             .hamburger { display: flex; }
             .nav-links {
@@ -311,8 +313,6 @@
             .hamburger.toggle span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); background: var(--color-blue); }
             .grid-2 { grid-template-columns: 1fr; text-align: center; }
             .hero h1 { font-size: 2.5rem; }
-            
-            /* Disable wide fly on mobile to stop horizontal scroll issue */
             .fly-left, .fly-right { transform: translateY(50px); } 
         }
     </style>
@@ -345,15 +345,12 @@
 
     <section id="about">
         <div class="container">
-            <!-- Title flies from Up -->
             <h2 class="section-title reveal fly-up">About Me</h2>
             <div class="grid-2">
-                <!-- Text flies from Left -->
                 <div class="about-text reveal fly-left">
                     <p>Hello! I am a Web and App Developer. I enjoy creating things that live on the internet.</p>
                     <p>My main goal is to write clean code and design websites that are easy for everyone to use. Whether it is a small website or a big app, I make sure it works perfectly on both phones and computers.</p>
                 </div>
-                <!-- Blob flies from Right -->
                 <div class="reveal fly-right">
                     <div class="blob-animation"></div>
                 </div>
@@ -365,7 +362,6 @@
         <div class="container">
             <h2 class="section-title reveal fly-up">My Skills</h2>
             <div class="skills-display">
-                <!-- Staggered Zoom-In Animation using inline transition-delay -->
                 <div class="skill-tag reveal zoom-in" style="transition-delay: 0.1s;"><i class="fab fa-html5"></i> HTML & CSS</div>
                 <div class="skill-tag reveal zoom-in" style="transition-delay: 0.2s;"><i class="fab fa-js"></i> JavaScript</div>
                 <div class="skill-tag reveal zoom-in" style="transition-delay: 0.3s;"><i class="fab fa-react"></i> React JS</div>
@@ -379,12 +375,14 @@
         <div class="container">
             <h2 class="section-title reveal fly-up">My Best Work</h2>
             <div class="grid-3">
-                <!-- Cards fly up one after another -->
+                
+                <!-- UPDATED PROJECT CARD -->
                 <div class="card reveal fly-up" style="transition-delay: 0.1s;">
-                    <h3 style="color: var(--color-pink);">Online Store</h3>
-                    <p>A fast shopping website where users can buy things easily. It works perfectly on mobile phones.</p>
-                    <a href="#" class="card-link">View Project &rarr;</a>
+                    <h3 style="color: var(--color-pink);">Online Food Delivery</h3>
+                    <p>A fast food delivery website where users can order meals easily. It works perfectly on mobile phones.</p>
+                    <a href="https://dreamydelight75.github.io" target="_blank" class="card-link">View Project &rarr;</a>
                 </div>
+                
                 <div class="card reveal fly-up" style="transition-delay: 0.3s;">
                     <h3 style="color: var(--color-blue);">Chat App</h3>
                     <p>A messaging app to talk with friends in real-time. It is safe and very easy to use.</p>
@@ -402,14 +400,15 @@
     <section id="contact">
         <div class="container">
             <h2 class="section-title reveal fly-up">Let's Talk</h2>
-            <!-- Entire box pops in from small scale -->
             <div class="contact-box reveal zoom-in" style="transition-delay: 0.2s;">
-                <p style="margin-bottom: 20px;">Do you have an idea or want a new website? Send me a message below!</p>
-                <form onsubmit="event.preventDefault(); alert('Message Sent!');">
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <textarea rows="4" placeholder="Type your message here..." required></textarea>
-                    <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                <p style="margin-bottom: 20px;">Do you have an idea or want a new website? Send me a message directly on WhatsApp!</p>
+                <!-- WHATSAPP FORM -->
+                <form id="whatsapp-form">
+                    <input type="text" id="wa-name" placeholder="Your Name" required>
+                    <textarea id="wa-message" rows="4" placeholder="Type your message here..." required></textarea>
+                    <button type="submit" class="btn btn-whatsapp" style="width: 100%;">
+                        <i class="fab fa-whatsapp" style="margin-right: 8px; font-size: 1.2rem;"></i> Send on WhatsApp
+                    </button>
                 </form>
             </div>
         </div>
@@ -420,7 +419,7 @@
     </footer>
 
     <script>
-        // 1. Mobile Menu Logic (60% Right Drawer with Bounce Effect)
+        // 1. Mobile Menu Logic
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
         const links = document.querySelectorAll('.nav-links li');
@@ -472,10 +471,9 @@
             loopDeleting();
         };
 
-        // Start typing after initial Hero animations finish (approx 1.5s)
         setTimeout(typingEffect, 1500);
 
-        // 3. Scroll Reveal Engine (This triggers the classes: fly-left, fly-up, zoom-in etc.)
+        // 3. Scroll Reveal Engine
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -484,11 +482,32 @@
             });
         }, { 
             threshold: 0.1, 
-            rootMargin: "0px 0px -50px 0px" // Trigger thoda pehle hota hai jisse delay na lage
+            rootMargin: "0px 0px -50px 0px" 
         });
 
         document.querySelectorAll('.reveal').forEach((el) => {
             observer.observe(el);
+        });
+
+        // 4. WhatsApp Integration Logic
+        document.getElementById('whatsapp-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop page from reloading
+            
+            // Get values from inputs
+            const name = document.getElementById('wa-name').value;
+            const message = document.getElementById('wa-message').value;
+            
+            // Add '91' country code to your number
+            const phoneNumber = "919471122016"; 
+            
+            // Format the message text
+            const text = `Hello Chandu, my name is ${name}.%0A%0A${message}`;
+            
+            // Create WhatsApp URL API link
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${text}`;
+            
+            // Open WhatsApp in a new tab
+            window.open(whatsappUrl, '_blank');
         });
     </script>
 
