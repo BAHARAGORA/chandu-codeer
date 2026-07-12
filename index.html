@@ -3,20 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Chandu Coder | Premium Portfolio</title>
+    <title>Chandu Coder | Animated Portfolio</title>
     
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Modern Dark Theme Palette & Smooth UI Reset */
+        /* Colorful Dark Theme */
         :root {
-            --bg-dark: #0d1117;
-            --bg-card: #161b22;
-            --accent: #58a6ff;
-            --accent-gradient: linear-gradient(135deg, #58a6ff, #bc8cff, #58a6ff);
-            --text-main: #f0f6fc;
-            --text-muted: #8b949e;
-            --border-color: #30363d;
+            --bg-dark: #0f172a; 
+            --bg-card: rgba(30, 41, 59, 0.7);
+            
+            /* Multiple Colors */
+            --color-pink: #ff2a5f;
+            --color-blue: #00d2ff;
+            --color-yellow: #ffaa00;
+            --color-green: #00e676;
+            --color-purple: #a020f0;
+
+            /* Colorful Gradient */
+            --multi-gradient: linear-gradient(90deg, var(--color-pink), var(--color-blue), var(--color-purple));
+            
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.1);
         }
 
         * {
@@ -24,20 +36,17 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
-            -webkit-font-smoothing: antialiased;
         }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--color-blue); border-radius: 5px; }
 
         html, body {
             background-color: var(--bg-dark);
             color: var(--text-main);
             overflow-x: hidden;
             scroll-behavior: smooth;
-            width: 100%;
-        }
-
-        /* Prevents zoom on double tap but allows text selection */
-        body {
-            touch-action: manipulation; 
         }
 
         .container {
@@ -47,17 +56,17 @@
             padding: 40px 20px;
         }
 
-        /* Navbar Layout */
+        /* Navbar Layout with Drop Animation */
         nav {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(13, 17, 23, 0.85);
+            background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border-color);
             z-index: 1000;
+            animation: slideDownNav 1s ease-out forwards;
         }
         
         .nav-container {
@@ -68,71 +77,48 @@
         }
         
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 800;
-            background: var(--accent-gradient);
+            background: var(--multi-gradient);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: textShine 4s linear infinite;
-            letter-spacing: 0.5px;
+            animation: colorShift 4s linear infinite;
             cursor: pointer;
         }
         
-        /* Navigation Links */
         .nav-links {
             display: flex;
-            gap: 25px;
+            gap: 30px;
             list-style: none;
-            transition: all 0.3s ease;
         }
         
         .nav-links a {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 500;
-            position: relative;
             transition: color 0.3s ease;
         }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--text-main);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
+        .nav-links a:hover { color: var(--color-blue); }
 
         /* Hamburger Menu Icon */
         .hamburger {
             display: none;
             flex-direction: column;
             cursor: pointer;
-            gap: 5px;
+            gap: 6px;
             z-index: 1001;
         }
-
         .hamburger span {
-            width: 25px;
+            width: 30px;
             height: 3px;
             background-color: var(--text-main);
             border-radius: 5px;
             transition: all 0.3s ease;
         }
 
-        /* Hero Section */
+        /* Hero Section Load Animations */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -140,313 +126,194 @@
             justify-content: center;
             text-align: center;
             padding-top: 80px;
-        }
-        
-        .hero-content {
-            opacity: 0;
-            transform: translateY(40px) scale(0.95);
-            animation: popIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            overflow: hidden;
         }
         
         .hero h1 {
-            font-size: 3.8rem;
+            font-size: 3.5rem;
             font-weight: 800;
-            margin-bottom: 20px;
-            line-height: 1.2;
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: flyInLeft 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.3s;
         }
         
         .hero h1 span {
-            background: var(--accent-gradient);
+            background: var(--multi-gradient);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: textShine 3s linear infinite;
+            animation: colorShift 3s linear infinite;
         }
         
+        .typing-text {
+            font-size: 1.5rem;
+            color: var(--color-yellow);
+            margin-bottom: 20px;
+            font-weight: 600;
+            height: 30px;
+            opacity: 0;
+            animation: flyInRight 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.6s;
+        }
+
         .hero p {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--text-muted);
             margin-bottom: 35px;
-            max-width: 650px;
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            line-height: 1.7;
+            line-height: 1.6;
+            opacity: 0;
+            animation: flyInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.9s;
+        }
+
+        .hero .btn {
+            opacity: 0;
+            animation: zoomPopIn 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 1.2s;
         }
 
         .btn {
             display: inline-block;
-            padding: 14px 35px;
-            background: var(--accent-gradient);
+            padding: 12px 30px;
+            background: var(--multi-gradient);
             background-size: 200% auto;
             color: #fff;
             text-decoration: none;
             font-weight: 600;
             border-radius: 30px;
-            box-shadow: 0 4px 15px rgba(88, 166, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(255, 42, 95, 0.4);
             transition: all 0.3s ease;
-            animation: pulseBtn 2s infinite;
+            border: none;
+            cursor: pointer;
         }
-        
         .btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(188, 140, 255, 0.5);
-            animation: none;
+            transform: translateY(-5px) scale(1.05);
             background-position: right center;
+            box-shadow: 0 10px 25px rgba(0, 210, 255, 0.6);
         }
 
         /* Global Sections */
-        section {
-            padding: 90px 0;
-            border-top: 1px solid #21262d;
-            overflow: hidden;
-        }
-        
-        .section-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 50px;
-            color: var(--text-main);
-        }
-        
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: var(--accent-gradient);
-            margin: 12px auto 0 auto;
-            border-radius: 4px;
-        }
+        section { padding: 80px 0; border-top: 1px solid var(--border-color); overflow: hidden; }
+        .section-title { font-size: 2.2rem; font-weight: 700; text-align: center; margin-bottom: 50px; color: var(--text-main); }
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 50px; align-items: center; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
 
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 50px;
-            align-items: center;
-        }
-        
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        /* About & Blob */
-        .about-text p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
+        /* About Section */
+        .about-text p { color: var(--text-muted); font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; }
         .blob-animation {
-            background: var(--accent-gradient);
+            background: var(--multi-gradient);
             background-size: 200% auto;
-            width: 250px;
-            height: 250px;
-            margin: 0 auto;
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            animation: bubble 6s ease-in-out infinite, textShine 5s linear infinite;
-            opacity: 0.85;
-            box-shadow: 0 10px 40px rgba(88, 166, 255, 0.4);
-            transition: transform 0.3s ease;
+            width: 280px; height: 280px; margin: 0 auto;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            animation: bubble 6s ease-in-out infinite, colorShift 5s linear infinite;
+            box-shadow: 0 10px 40px rgba(0, 210, 255, 0.3);
         }
-        
-        .blob-animation:hover { transform: scale(1.05); }
 
         /* Skills */
-        .skills-display {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        
+        .skills-display { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
         .skill-tag {
-            background: rgba(88, 166, 255, 0.05);
-            color: var(--accent);
-            padding: 10px 22px;
-            border-radius: 30px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            border: 1px solid rgba(88, 166, 255, 0.2);
-            transition: all 0.4s ease;
-            cursor: default;
+            display: flex; align-items: center; gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 20px; border-radius: 30px;
+            font-size: 1rem; font-weight: 500;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
         }
         
-        .skill-tag:hover {
-            background: var(--accent);
-            color: var(--bg-dark);
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 10px 20px rgba(88, 166, 255, 0.3);
-        }
+        .skill-tag:nth-child(1) i { color: var(--color-pink); }
+        .skill-tag:nth-child(2) i { color: var(--color-yellow); }
+        .skill-tag:nth-child(3) i { color: var(--color-blue); }
+        .skill-tag:nth-child(4) i { color: var(--color-green); }
+        .skill-tag:nth-child(5) i { color: var(--color-purple); }
+
+        .skill-tag:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-8px) scale(1.1); }
 
         /* Project Cards */
         .card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 35px 25px;
-            transition: all 0.4s ease;
-            position: relative;
-            z-index: 1;
+            border-radius: 15px; padding: 30px 25px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative; z-index: 1;
         }
         
         .card::before {
-            content: "";
-            position: absolute;
+            content: ""; position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            border-radius: 16px;
-            background: var(--accent-gradient);
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            margin: -2px;
+            border-radius: 15px; z-index: -1; opacity: 0;
+            transition: opacity 0.4s ease; margin: -2px;
         }
+
+        .card:nth-child(1)::before { background: linear-gradient(135deg, var(--color-pink), var(--color-blue)); }
+        .card:nth-child(2)::before { background: linear-gradient(135deg, var(--color-blue), var(--color-green)); }
+        .card:nth-child(3)::before { background: linear-gradient(135deg, var(--color-yellow), var(--color-purple)); }
         
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-        }
-        
+        .card:hover { transform: translateY(-15px) scale(1.03); box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
         .card:hover::before { opacity: 1; }
         
-        .card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            color: var(--text-main);
+        .card h3 { font-size: 1.4rem; margin-bottom: 10px; }
+        .card p { color: var(--text-muted); margin-bottom: 20px; line-height: 1.5; }
+        .card-link { color: var(--color-blue); text-decoration: none; font-weight: 600; display: inline-block; transition: transform 0.3s;}
+        .card-link:hover { transform: translateX(10px); }
+
+        /* Contact Section */
+        .contact-box {
+            background: rgba(0,0,0,0.2); padding: 40px; border-radius: 20px;
+            border: 1px solid var(--border-color); text-align: center; max-width: 600px; margin: 0 auto;
         }
+        .contact-box input, .contact-box textarea {
+            width: 100%; padding: 12px; margin-bottom: 15px; background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color); border-radius: 8px; color: #fff; outline: none; transition: 0.3s;
+        }
+        .contact-box input:focus, .contact-box textarea:focus { border-color: var(--color-pink); background: rgba(255,255,255,0.1); }
+        footer { text-align: center; padding: 20px 0; background: #080c16; color: var(--text-muted); }
+
+        /* ========================================================
+           SCROLL REVEAL ANIMATION CLASSES (Yaha Jadu Hai!)
+           ======================================================== */
         
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
+        /* Base Reveal Class */
+        .reveal { opacity: 0; transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translate(0) scale(1); }
+
+        /* Specific Directions */
+        .fly-left { transform: translateX(-150px); }
+        .fly-right { transform: translateX(150px); }
+        .fly-up { transform: translateY(100px); }
+        .zoom-in { transform: scale(0.5); }
+
+        /* ========================================================
+           KEYFRAMES (Page Load Animations)
+           ======================================================== */
+        @keyframes slideDownNav { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+        @keyframes flyInLeft { from { opacity: 0; transform: translateX(-100px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes flyInRight { from { opacity: 0; transform: translateX(100px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes flyInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes zoomPopIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
         
-        .card-link {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: gap 0.3s ease;
-        }
-        
-        .card-link:hover { gap: 12px; }
+        @keyframes colorShift { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+        @keyframes bubble { 0%, 100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; } 50% { border-radius: 70% 30% 40% 60% / 60% 40% 50% 40%; } }
 
-        /* Footer */
-        footer {
-            background: #090d13;
-            padding: 60px 0 30px;
-            text-align: center;
-        }
-        
-        .contact-info p {
-            margin: 12px 0;
-            font-size: 1.05rem;
-            color: var(--text-muted);
-        }
-        
-        .contact-info a {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .copyright {
-            font-size: 0.85rem;
-            color: #484f58;
-            margin-top: 40px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 20px;
-        }
-
-        /* Scroll Reveal Utility */
-        .reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease-out;
-        }
-        
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Keyframes */
-        @keyframes popIn {
-            0% { opacity: 0; transform: translateY(40px) scale(0.95); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        @keyframes bubble {
-            0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-            50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
-        }
-
-        @keyframes textShine {
-            0% { background-position: 0% center; }
-            100% { background-position: 200% center; }
-        }
-
-        @keyframes pulseBtn {
-            0% { box-shadow: 0 0 0 0 rgba(88, 166, 255, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(88, 166, 255, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(88, 166, 255, 0); }
-        }
-
-        /* MOBILE RESPONSIVE FIXES */
+        /* MOBILE RESPONSIVE - 60% SIDE MENU */
         @media (max-width: 768px) {
-            .hamburger { display: flex; } /* Show Hamburger */
-            
+            .hamburger { display: flex; }
             .nav-links {
-                position: absolute;
-                top: 100%; /* Just below navbar */
-                left: 0;
-                width: 100%;
-                background: rgba(22, 27, 34, 0.95);
-                backdrop-filter: blur(10px);
-                flex-direction: column;
-                text-align: center;
-                padding: 20px 0;
-                border-bottom: 1px solid var(--border-color);
-                /* Hide menu by default off-screen */
-                transform: translateY(-150%);
-                opacity: 0;
-                pointer-events: none;
+                position: fixed; top: 0; right: 0; width: 60%; height: 100vh;
+                background: rgba(15, 23, 42, 0.98); flex-direction: column; justify-content: center; align-items: center;
+                padding: 40px 20px; border-left: 2px solid var(--color-blue);
+                transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                box-shadow: -10px 0 30px rgba(0,0,0,0.5);
             }
-
-            .nav-links.mobile-active {
-                transform: translateY(0);
-                opacity: 1;
-                pointer-events: all;
-            }
-
-            /* Hamburger X Animation */
-            .hamburger.toggle span:nth-child(1) {
-                transform: rotate(-45deg) translate(-5px, 6px);
-            }
-            .hamburger.toggle span:nth-child(2) {
-                opacity: 0;
-            }
-            .hamburger.toggle span:nth-child(3) {
-                transform: rotate(45deg) translate(-5px, -6px);
-            }
-
-            .grid-2 {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 30px;
-            }
-            
+            .nav-links.mobile-active { transform: translateX(0); }
+            .nav-links a { font-size: 1.2rem; margin: 15px 0; display: block; }
+            .hamburger.toggle span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); background: var(--color-pink); }
+            .hamburger.toggle span:nth-child(2) { opacity: 0; }
+            .hamburger.toggle span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); background: var(--color-blue); }
+            .grid-2 { grid-template-columns: 1fr; text-align: center; }
             .hero h1 { font-size: 2.5rem; }
-            .hero p { font-size: 1rem; }
-            .blob-animation { width: 180px; height: 180px; }
+            
+            /* Disable wide fly on mobile to stop horizontal scroll issue */
+            .fly-left, .fly-right { transform: translateY(50px); } 
         }
     </style>
 </head>
@@ -454,18 +321,14 @@
 
     <nav>
         <div class="nav-container">
-            <div class="logo">Chandu Coder</div>
-            
+            <div class="logo">ChanduCoder</div>
             <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </div>
-
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
+                <li><a href="#projects">Work</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -473,90 +336,100 @@
 
     <header class="hero">
         <div class="hero-content container">
-            <h1>Hi, I'm <span>Chandu Coder</span></h1>
-            <p>Premium Web & Full-Stack Application Developer crafting immersive, ultra-responsive, and animated digital experiences.</p>
-            <a href="#contact" class="btn">Hire Me</a>
+            <h1>Hi, I am <span>Chandu</span></h1>
+            <div class="typing-text">I am a <span id="typing"></span><span class="cursor">|</span></div>
+            <p>I build fast, beautiful, and easy-to-use websites and apps. I love coding and making simple ideas look great on screen.</p>
+            <a href="#contact" class="btn">Message Me</a>
         </div>
     </header>
 
-    <section id="about" class="reveal">
+    <section id="about">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
+            <!-- Title flies from Up -->
+            <h2 class="section-title reveal fly-up">About Me</h2>
             <div class="grid-2">
-                <div class="about-text">
-                    <p>Main ek passionate Website aur Application Developer hu, jo ideas ko secure, scalable aur lightning-fast code mein badalta hai. Mera goal aisi digital space create karna hai jo dekhne mein premium lage aur chalne mein smooth ho.</p>
-                    <p>Har ek project mein UI/UX, fluid responsive layout, aur performance optimization ka poora dhyan rakhta hu taaki users ko behtareen experience mile.</p>
+                <!-- Text flies from Left -->
+                <div class="about-text reveal fly-left">
+                    <p>Hello! I am a Web and App Developer. I enjoy creating things that live on the internet.</p>
+                    <p>My main goal is to write clean code and design websites that are easy for everyone to use. Whether it is a small website or a big app, I make sure it works perfectly on both phones and computers.</p>
                 </div>
-                <div style="text-align: center;">
+                <!-- Blob flies from Right -->
+                <div class="reveal fly-right">
                     <div class="blob-animation"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="skills" class="reveal">
+    <section id="skills">
         <div class="container">
-            <h2 class="section-title">My Tech Stack</h2>
+            <h2 class="section-title reveal fly-up">My Skills</h2>
             <div class="skills-display">
-                <div class="skill-tag">HTML5 & CSS3</div>
-                <div class="skill-tag">JavaScript (ES6+)</div>
-                <div class="skill-tag">ReactJS / NextJS</div>
-                <div class="skill-tag">Node.js & Express</div>
-                <div class="skill-tag">Flutter & Firebase</div>
-                <div class="skill-tag">UI/UX Styling (Tailwind)</div>
-                <div class="skill-tag">Git & Cloud Deployment</div>
+                <!-- Staggered Zoom-In Animation using inline transition-delay -->
+                <div class="skill-tag reveal zoom-in" style="transition-delay: 0.1s;"><i class="fab fa-html5"></i> HTML & CSS</div>
+                <div class="skill-tag reveal zoom-in" style="transition-delay: 0.2s;"><i class="fab fa-js"></i> JavaScript</div>
+                <div class="skill-tag reveal zoom-in" style="transition-delay: 0.3s;"><i class="fab fa-react"></i> React JS</div>
+                <div class="skill-tag reveal zoom-in" style="transition-delay: 0.4s;"><i class="fab fa-node-js"></i> Node JS</div>
+                <div class="skill-tag reveal zoom-in" style="transition-delay: 0.5s;"><i class="fas fa-database"></i> Database</div>
             </div>
         </div>
     </section>
 
-    <section id="projects" class="reveal">
+    <section id="projects">
         <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
+            <h2 class="section-title reveal fly-up">My Best Work</h2>
             <div class="grid-3">
-                <div class="card">
-                    <h3>Premium E-Commerce App</h3>
-                    <p>Modern fluid UI ke sath high-performance e-commerce platform jo mobile aur desktop dono par lightning fast chalta hai.</p>
-                    <a href="#" class="card-link">Live Preview <span>&rarr;</span></a>
+                <!-- Cards fly up one after another -->
+                <div class="card reveal fly-up" style="transition-delay: 0.1s;">
+                    <h3 style="color: var(--color-pink);">Online Store</h3>
+                    <p>A fast shopping website where users can buy things easily. It works perfectly on mobile phones.</p>
+                    <a href="#" class="card-link">View Project &rarr;</a>
                 </div>
-                <div class="card">
-                    <h3>Real-time Chat Platform</h3>
-                    <p>WebSocket aur secure encryption par chalne wala sleek dashboard messaging application.</p>
-                    <a href="#" class="card-link">View Source <span>&rarr;</span></a>
+                <div class="card reveal fly-up" style="transition-delay: 0.3s;">
+                    <h3 style="color: var(--color-blue);">Chat App</h3>
+                    <p>A messaging app to talk with friends in real-time. It is safe and very easy to use.</p>
+                    <a href="#" class="card-link">View Project &rarr;</a>
                 </div>
-                <div class="card">
-                    <h3>SaaS Automation Tool</h3>
-                    <p>Complex business analytics data ko beautiful charts aur seamless animation me display karne wala platform.</p>
-                    <a href="#" class="card-link">Explore Code <span>&rarr;</span></a>
+                <div class="card reveal fly-up" style="transition-delay: 0.5s;">
+                    <h3 style="color: var(--color-yellow);">Data Dashboard</h3>
+                    <p>A clean page to show business numbers using colorful charts and simple designs.</p>
+                    <a href="#" class="card-link">View Project &rarr;</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer id="contact" class="reveal">
+    <section id="contact">
         <div class="container">
-            <h2 class="section-title" style="margin-bottom: 30px;">Let's Connect</h2>
-            <div class="contact-info">
-                <p>Email: <a href="mailto:chanducoder@example.com">chanducoder@example.com</a></p>
-                <p>GitHub: <a href="#">github.com/chanducoder</a></p>
+            <h2 class="section-title reveal fly-up">Let's Talk</h2>
+            <!-- Entire box pops in from small scale -->
+            <div class="contact-box reveal zoom-in" style="transition-delay: 0.2s;">
+                <p style="margin-bottom: 20px;">Do you have an idea or want a new website? Send me a message below!</p>
+                <form onsubmit="event.preventDefault(); alert('Message Sent!');">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea rows="4" placeholder="Type your message here..." required></textarea>
+                    <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                </form>
             </div>
-            <p class="copyright">&copy; 2026 Chandu Coder. All Rights Reserved. Fully Responsive UX.</p>
         </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Chandu Coder. Built with simple code and love.</p>
     </footer>
 
     <script>
-        // 1. Mobile Hamburger Menu Logic
+        // 1. Mobile Menu Logic (60% Right Drawer with Bounce Effect)
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
         const links = document.querySelectorAll('.nav-links li');
 
         hamburger.addEventListener('click', () => {
-            // Toggle Nav
             navLinks.classList.toggle('mobile-active');
-            // Burger Animation
             hamburger.classList.toggle('toggle');
         });
 
-        // Close menu when a link is clicked on mobile
         links.forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('mobile-active');
@@ -564,23 +437,59 @@
             });
         });
 
-        // 2. Scroll Reveal Animation Logic
-        window.addEventListener('scroll', reveal);
-        function reveal() {
-            var reveals = document.querySelectorAll('.reveal');
-            for(var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var revealTop = reveals[i].getBoundingClientRect().top;
-                var revealPoint = 120; // Animation trigger point
+        // 2. Simple Typing Effect
+        const words = ["Web Developer.", "App Maker.", "Freelancer."];
+        let i = 0;
+        let timer;
 
-                if(revealTop < windowHeight - revealPoint) {
-                    reveals[i].classList.add('active');
+        function typingEffect() {
+            let word = words[i].split("");
+            var loopTyping = function() {
+                if (word.length > 0) {
+                    document.getElementById('typing').innerHTML += word.shift();
+                } else {
+                    setTimeout(deletingEffect, 2000);
+                    return false;
+                };
+                timer = setTimeout(loopTyping, 100);
+            };
+            loopTyping();
+        };
+
+        function deletingEffect() {
+            let word = words[i].split("");
+            var loopDeleting = function() {
+                if (word.length > 0) {
+                    word.pop();
+                    document.getElementById('typing').innerHTML = word.join("");
+                } else {
+                    i = (i + 1) % words.length;
+                    typingEffect();
+                    return false;
+                };
+                timer = setTimeout(loopDeleting, 50);
+            };
+            loopDeleting();
+        };
+
+        // Start typing after initial Hero animations finish (approx 1.5s)
+        setTimeout(typingEffect, 1500);
+
+        // 3. Scroll Reveal Engine (This triggers the classes: fly-left, fly-up, zoom-in etc.)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
                 }
-            }
-        }
-        
-        // Trigger reveal on initial page load
-        reveal();
+            });
+        }, { 
+            threshold: 0.1, 
+            rootMargin: "0px 0px -50px 0px" // Trigger thoda pehle hota hai jisse delay na lage
+        });
+
+        document.querySelectorAll('.reveal').forEach((el) => {
+            observer.observe(el);
+        });
     </script>
 
 </body>
